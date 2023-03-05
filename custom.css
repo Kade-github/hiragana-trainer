@@ -11,3 +11,27 @@
 .bs-component .modal-dialog {
 	width: 90%
 }
+
+#hiragana {
+	height: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#card {
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	background-color: white;
+	border-radius: 10px;
+	position: relative;
+	width: 50%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 62px;
+}
+
