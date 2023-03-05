@@ -19,7 +19,7 @@ const requestListener = function (req, res) {
 };
 
 const server = http.createServer(requestListener);
-server.listen(8000, 'localhost', () => {
-    console.log(`Server is running on localhost:8000`);
+server.listen(9200, 'localhost', () => {
+    console.log(`Server is running on localhost:9200`);
     
 });
