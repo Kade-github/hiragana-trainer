@@ -19,7 +19,10 @@ const requestListener = function (req, res) {
 };
 
 const server = http.createServer(requestListener);
-server.listen(9200, () => {
-    console.log(`Server is running on *:9200`);
+
+var port = 8880;
+
+server.listen(port, () => {
+    console.log(`Server is running on *:${port}`);
     
 });
