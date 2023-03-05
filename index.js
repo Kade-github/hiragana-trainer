@@ -3,11 +3,24 @@ const fs = require('fs').promises;
 
 const requestListener = function (req, res) {
     let p = req.url;
-    if (p == undefined || p == "/")
+    if (p == undefined || p == "/" || p == "/index.js")
         p = "/index.html";
     fs.readFile(__dirname + p)
         .then(contents => {
-            res.setHeader("Content-Type", "text/html");
+            if (p.endsWith(".ico"))
+            {
+                res.setHeader("Content-Type", "image/x-icon");
+                fs.createReadStream(FAVICON).pipe(res);
+                return;
+            }
+            else if (p.endsWith(".png"))
+            {
+                res.setHeader("Content-Type", "image/png");
+                fs.createReadStream(__dirname + p).pipe(res);
+                return;
+            }
+            else
+                res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
             res.end(contents);
         })
