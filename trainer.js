@@ -10,6 +10,7 @@ var an = document.getElementById("buttonAnswer");
 an.style.opacity = 0;
 an.style.transition = "opacity 0s ease-in-out";
 
+
 amt.style.opacity = 0;
 amt.style.transition = "opacity 0s ease-in-out";
 amt.disabled = true;
@@ -93,6 +94,7 @@ var currentSymbol = null;
 
 var count = 0;
 var max = 0;
+var sa = false;
 
 function showRandom()
 {
@@ -118,6 +120,7 @@ function showRandom()
     amt.innerHTML = count + "/" + max;
     an.innerHTML = "Answer";
     an.addEventListener("click", showAnswer);
+    sa = false;
     count++;
 }
 
@@ -125,11 +128,22 @@ function showAnswer()
 {
     if (currentSymbol == null)
         return;
+    sa = true;
     an.removeEventListener("click", showAnswer);
     an.innerHTML = "Next";
     tex.innerHTML = currentSymbol[1];
     an.addEventListener("click", showRandom);
 }
+
+an.addEventListener("keyup", function(event) {
+    if (event.key == "Enter" && currentSymbol != null)
+    {
+        if (!sa)
+            showAnswer();
+        else
+            showRandom();
+    }
+});
 
 b.addEventListener("click", function() {
     card.style.opacity = 1;
