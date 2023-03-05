@@ -5,26 +5,14 @@ const requestListener = function (req, res) {
     let p = req.url;
     if (p == undefined || p == "/" || p == "/index.js")
         p = "/index.html";
-    fs.readFile(__dirname + p)
+    var d = __dirname + p;
+    fs.readFile(d)
         .then(contents => {
-            if (p.endsWith(".ico"))
-            {
-                res.setHeader("Content-Type", "image/x-icon");
-                fs.createReadStream(FAVICON).pipe(res);
-                return;
-            }
-            else if (p.endsWith(".png"))
-            {
-                res.setHeader("Content-Type", "image/png");
-                fs.createReadStream(__dirname + p).pipe(res);
-                return;
-            }
-            else
-                res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
             res.end(contents);
         })
         .catch(err => {
+
             res.writeHead(404);
             res.end("404 lol");
             return;
