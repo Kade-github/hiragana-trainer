@@ -135,7 +135,7 @@ function showAnswer()
     an.addEventListener("click", showRandom);
 }
 
-an.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event) {
     if (event.key == "Enter" && currentSymbol != null)
     {
         if (!sa)
