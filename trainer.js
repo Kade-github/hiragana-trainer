@@ -4,10 +4,15 @@ var b = document.getElementById("buttonStart");
 var bb = document.getElementById("buttonStartDakuon");
 var bbb = document.getElementById("buttonStartEverything");
 
+var amt = document.getElementById("amount");
+
 var an = document.getElementById("buttonAnswer");
 an.style.opacity = 0;
 an.style.transition = "opacity 0s ease-in-out";
-an.disabled = true;
+
+amt.style.opacity = 0;
+amt.style.transition = "opacity 0s ease-in-out";
+amt.disabled = true;
 var tex = document.getElementById("hiraganaText");
 
 var hiraganaRomanized = [
@@ -86,29 +91,34 @@ var toShow = [
 
 var currentSymbol = null;
 
+var count = 0;
+var max = 0;
 
 function showRandom()
 {
     an.disabled = false;
     an.removeEventListener("click", showRandom);
     an.style.transition = "opacity 1s ease-in-out";
+    amt.style.transition = "opacity 1s ease-in-out";
     if (toShow.length == 0)
     {
         tex.innerHTML = "Done!";
         an.style.opacity = 0;
+        amt.style.opacity = 0;
         an.disabled = true;
         return;
     }
     var a = toShow[Math.floor(Math.random() * toShow.length)];
     currentSymbol = a;
     tex.innerHTML = a[0];
-    an.style.opacity = 0;
+    amt.style.opacity = 1;
     an.style.opacity = 1;
-    card.style.opacity = 0;
     card.style.opacity = 1;
     toShow.splice(toShow.indexOf(a), 1);
+    amt.innerHTML = count + "/" + max;
     an.innerHTML = "Answer";
     an.addEventListener("click", showAnswer);
+    count++;
 }
 
 function showAnswer()
@@ -129,6 +139,9 @@ b.addEventListener("click", function() {
         toShow.push([a,hiragana[i]]);
         i++;
     });
+    
+    count = 0;
+    max = toShow.length;
 
     showRandom();
 });
@@ -146,6 +159,9 @@ bb.addEventListener("click", function() {
         toShow.push([a,hiraganaDakuon[i]]);
         i++;
     });
+
+    count = 0;
+    max = toShow.length;
 
     showRandom();
 });
@@ -169,6 +185,8 @@ bbb.addEventListener("click", function() {
         i++;
     });
 
+    count = 0;
+    max = toShow.length;
 
     showRandom();
 });
